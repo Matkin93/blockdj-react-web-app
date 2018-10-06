@@ -5,16 +5,16 @@ import produce from 'immer';
 
 import AuthZeroService from '../../services/AuthZero';
 import SpotifyService from '../../services/Spotify';
+
 import AuthZeroGuard from '../Auth0/Guard';
 import AuthZeroCallback from '../Auth0/Callback';
 import AuthZeroUnauthorized from '../Auth0/Unauthorised';
 import SpotifyCallback from '../Spotify/Callback';
 import SpotifyUnauthorised from '../Spotify/Unauthorised';
+import SpotifyPlaylistChooser from '../Spotify/Playlist/Chooser';
 import Profile from '../Profile';
-
 import Layout from '../Layout';
 import MapView from '../MapView';
-import SpotifyPlaylistChooser from '../Spotify/PlaylistChooser';
 
 class App extends Component {
   state = {

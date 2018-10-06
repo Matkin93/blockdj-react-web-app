@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Button } from 'reactstrap';
 
-import { getSpotifyAuthUrl } from '../../../utils/common';
-import config from '../../../config';
+import { getSpotifyAuthUrl } from '../../../../utils/common';
+import config from '../../../../config';
 
 const SpotifyAuthorizeButton = (props) => {
     const {isSpotifyAuthenticated, spotifyLogout} = props;
