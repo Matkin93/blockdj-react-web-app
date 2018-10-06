@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, Container } from 'reactstrap';
+import { Button, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, Container } from 'reactstrap';
 import SpotifyAuthorizeButton from '../Spotify/AuthorizeButton';
 
 class Header extends Component {
@@ -22,6 +22,9 @@ class Header extends Component {
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    <NavLink href="/playlists">Playlists</NavLink>
+                                </NavItem>                            
                                 <NavItem>
                                     <SpotifyAuthorizeButton {...this.props} />
                                 </NavItem>                                

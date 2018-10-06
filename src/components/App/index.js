@@ -14,6 +14,7 @@ import Profile from '../Profile';
 
 import Layout from '../Layout';
 import MapView from '../MapView';
+import SpotifyPlaylistChooser from '../Spotify/PlaylistChooser';
 
 class App extends Component {
   state = {
@@ -38,6 +39,13 @@ class App extends Component {
             </Layout>
           </AuthZeroGuard>)}
         />
+        <Route exact path="/playlists" render={(props) => (
+          <AuthZeroGuard {...props} authZeroLogin={azs.login} isAuthZeroAuthenticated={azs.isAuthenticated}>
+            <Layout {...props} authZeroLogout={azs.logout} isSpotifyAuthenticated={sps.isAuthenticated} spotifyLogout={sps.logout}>
+              <SpotifyPlaylistChooser {...props}/>
+            </Layout>
+          </AuthZeroGuard>)}
+        />        
         <Route exact path="/user/callback" render={(props) => {
           return <AuthZeroCallback {...props} handleAuthZeroAuth={azs.handleAuth} hasProfile={this.hasProfile} />
         }} />
