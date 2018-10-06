@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Unauthorised = (props) => {
+const AuthZeroUnauthorised = (props) => {
     return (
         <div>
             <p>Unauthorised</p>
@@ -10,4 +10,4 @@ const Unauthorised = (props) => {
     );
 };
 
-export default Unauthorised;
+export default AuthZeroUnauthorised;

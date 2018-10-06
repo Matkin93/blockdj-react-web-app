@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 
-const Guard = props => {
+const AuthZeroGuard = props => {
     const {isAuthenticated, login, children} = props;
     if (isAuthenticated()) return children
     else return (
@@ -10,9 +10,9 @@ const Guard = props => {
     )
 }
 
-Guard.propTypes = {
+AuthZeroGuard.propTypes = {
     isAuthenticated: PropTypes.func.isRequired,
     children: PropTypes.any.isRequired
 }
 
-export default Guard;
+export default AuthZeroGuard;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Callback extends Component {
+class SpotifyCallback extends Component {
     render() {
         return (
             <div>
@@ -17,4 +17,4 @@ class Callback extends Component {
     }
 }
 
-export default Callback;
+export default SpotifyCallback;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Callback extends Component {
+class AuthZeroCallback extends Component {
     render() {
         return (
             <div>
@@ -16,4 +16,4 @@ class Callback extends Component {
     }
 }
 
-export default Callback;
+export default AuthZeroCallback;

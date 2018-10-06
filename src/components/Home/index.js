@@ -18,7 +18,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <Button onClick={this.authorize}>Authorize</Button>
+                <Button onClick={this.authorize}><i className="fab fa-spotify"></i> Authorize</Button>
             </div>
         );    
     }

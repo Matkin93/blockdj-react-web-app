@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AuthZeroService from '../../services/AuthZero';
 import SpotifyService from '../../services/Spotify';
-import Guard from '../Auth0/Guard';
-import {default as AuthZeroCallback} from '../Auth0/Callback';
-import {default as AuthZeroUnauthorized} from '../Auth0/Unauthorised';
-import {default as SpotifyCallback} from '../Spotify/Callback';
-import {default as SpotifyUnauthorised} from '../Spotify/Unauthorised';
+import AuthZeroGuard from '../Auth0/Guard';
+import AuthZeroCallback from '../Auth0/Callback';
+import AuthZeroUnauthorized from '../Auth0/Unauthorised';
+import SpotifyCallback from '../Spotify/Callback';
+import SpotifyUnauthorised from '../Spotify/Unauthorised';
 
 import Layout from '../Layout';
 import Home from '../Home';
@@ -22,12 +22,12 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path="/" render={(props) => (
-          <Guard {...props} login={azs.login} isAuthenticated={azs.isAuthenticated}>
+          <AuthZeroGuard {...props} login={azs.login} isAuthenticated={azs.isAuthenticated}>
             <Layout logout={azs.logout}>
               <Home {...props} isAuthenticated={sps.isAuthenticated}/>
               <MapView {...props}/>
             </Layout>
-          </Guard>)}
+          </AuthZeroGuard>)}
         />
         <Route exact path="/user/callback" render={(props) => {
           return <AuthZeroCallback {...props} handleAuth={azs.handleAuth} />
@@ -36,18 +36,18 @@ class App extends Component {
           return <AuthZeroUnauthorized {...props} logout={azs.logout} />
         }} />
         <Route exact path="/spotify/callback" render={(props) => (
-          <Guard {...props} login={azs.login} isAuthenticated={azs.isAuthenticated}>
+          <AuthZeroGuard {...props} login={azs.login} isAuthenticated={azs.isAuthenticated}>
             <Layout logout={azs.logout}>
               <SpotifyCallback {...props} handleAuth={sps.handleAuth} />
             </Layout>
-          </Guard>
+          </AuthZeroGuard>
         )} />      
         <Route exact path="/spotify/unauthorised" render={(props) => (
-          <Guard {...props} login={azs.login} isAuthenticated={azs.isAuthenticated}>
+          <AuthZeroGuard {...props} login={azs.login} isAuthenticated={azs.isAuthenticated}>
             <Layout logout={azs.logout}>          
               <SpotifyUnauthorised {...props} logout={sps.logout} />
             </Layout>
-          </Guard>
+          </AuthZeroGuard>
         )} />      
       
       </Switch>
