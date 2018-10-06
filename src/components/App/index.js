@@ -1,29 +1,44 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import AuthZeroService from '../../services/AuthZeroService';
-import Auth from '../Auth';
-import Callback from '../Callback';
-import Unauthorised from '../Unauthorised';
+import AuthZeroService from '../../services/AuthZero';
+import SpotifyService from '../../services/Spotify';
+import Guard from '../Auth0/Guard';
+import {default as AuthZeroCallback} from '../Auth0/Callback';
+import {default as AuthZeroUnauthorized} from '../Auth0/Unauthorised';
+import {default as SpotifyCallback} from '../Spotify/Callback';
+import {default as SpotifyUnauthorised} from '../Spotify/Unauthorised';
+
 import Layout from '../Layout';
+import Home from '../Home';
+import MapView from '../MapView';
 
 class App extends Component {
   render() {
     const azs = new AuthZeroService();
+    const sps = new SpotifyService();
     return (
       <Switch>
         <Route exact path="/" render={(props) => (
-          <Auth {...props} login={azs.login} isAuthenticated={azs.isAuthenticated}>
+          <Guard {...props} login={azs.login} isAuthenticated={azs.isAuthenticated}>
             <Layout logout={azs.logout}>
-              I am home
+              <Home {...props} isAuthenticated={sps.isAuthenticated}/>
+              <MapView {...props}/>
             </Layout>
-          </Auth>)}
+          </Guard>)}
         />
-        <Route exact path="/callback" render={(props) => {
-          return <Callback {...props} handleAuthentication={azs.handleAuthentication} />
+        <Route exact path="/user/callback" render={(props) => {
+          return <AuthZeroCallback {...props} handleAuth={azs.handleAuth} />
         }} />
-        <Route exact path="/unauthorised" render={(props) => {
-          return <Unauthorised {...props} logout={azs.logout} />
+        <Route exact path="/user/unauthorised" render={(props) => {
+          return <AuthZeroUnauthorized {...props} logout={azs.logout} />
         }} />
+        <Route exact path="/spotify/callback" render={(props) => {
+          return <SpotifyCallback {...props} handleAuth={sps.handleAuth} />
+        }} />      
+        <Route exact path="/spotify/unauthorised" render={(props) => {
+          return <SpotifyUnauthorised {...props} logout={sps.logout} />
+        }} />      
+      
       </Switch>
     )
   }

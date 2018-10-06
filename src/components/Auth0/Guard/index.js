@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 
-const Auth = props => {
+const Guard = props => {
     const {isAuthenticated, login, children} = props;
     if (isAuthenticated()) return children
     else return (
@@ -10,9 +10,9 @@ const Auth = props => {
     )
 }
 
-Auth.propTypes = {
+Guard.propTypes = {
     isAuthenticated: PropTypes.func.isRequired,
     children: PropTypes.any.isRequired
 }
 
-export default Auth;
+export default Guard;
