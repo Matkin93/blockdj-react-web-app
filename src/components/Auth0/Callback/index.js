@@ -19,7 +19,8 @@ class AuthZeroCallback extends Component {
 
 AuthZeroCallback.propTypes = {
     handleAuthZeroAuth: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    hasProfile: PropTypes.any.isRequired,
 }
 
 export default AuthZeroCallback;

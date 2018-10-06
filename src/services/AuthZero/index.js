@@ -14,12 +14,16 @@ export default class AuthZeroService{
         this.authZero.authorize();
     }
     handleAuth = (props) => {
-        const {history} = props;        
+        const {history, hasProfile} = props;        
         this.authZero.parseHash((err, params) => {
             if(err) history.replace('/user/unauthorised');
             if (params && params.accessToken && params.idToken){
                 this.setSession(params, props);
-                history.replace('/')
+                if (hasProfile()){
+                    history.replace('/')
+                }else{
+                    history.replace('/profile');
+                }
             }
         })
     }

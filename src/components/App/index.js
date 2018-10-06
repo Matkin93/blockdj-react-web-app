@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+
+import produce from 'immer';
+
 import AuthZeroService from '../../services/AuthZero';
 import SpotifyService from '../../services/Spotify';
 import AuthZeroGuard from '../Auth0/Guard';
@@ -30,7 +33,7 @@ class App extends Component {
           </AuthZeroGuard>)}
         />
         <Route exact path="/user/callback" render={(props) => {
-          return <AuthZeroCallback {...props} handleAuthZeroAuth={azs.handleAuth} />
+          return <AuthZeroCallback {...props} handleAuthZeroAuth={azs.handleAuth} hasProfile={this.hasProfile} />
         }} />
         <Route exact path="/user/unauthorised" render={(props) => {
           return <AuthZeroUnauthorized {...props} authZeroLogout={azs.logout} />
@@ -52,6 +55,14 @@ class App extends Component {
       
       </Switch>
     )
+  }
+  hasProfile = () => {
+    return this.state.profile;
+  }
+  setProfile = (profile) => {
+    this.setState(produce(draft => {
+      draft.profile = profile
+    }))
   }
 }
 
