@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, Container } from 'reactstrap';
 import SpotifyAuthorizeButton from '../Spotify/AuthorizeButton';
 
@@ -12,7 +13,7 @@ class Header extends Component {
         });
     }      
     render() {
-        const {logout} = this.props;
+        const {authZeroLogout} = this.props;
         return (
             <Fragment>
                 <Navbar color="dark" dark expand="md">
@@ -22,10 +23,10 @@ class Header extends Component {
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <SpotifyAuthorizeButton />
+                                    <SpotifyAuthorizeButton {...this.props} />
                                 </NavItem>                                
                                 <NavItem>
-                                    <Button color="primary" size="sm" onClick={logout}>Logout</Button>
+                                    <Button color="primary" size="sm" onClick={authZeroLogout}>Logout</Button>
                                 </NavItem>
                             </Nav>
                         </Collapse>
@@ -35,6 +36,12 @@ class Header extends Component {
 
         );
     }
+}
+
+Header.propTypes = {
+    authZeroLogout: PropTypes.func.isRequired,
+    isSpotifyAuthenticated: PropTypes.func.isRequired,
+    spotifyLogout: PropTypes.func.isRequired
 }
 
 export default Header;

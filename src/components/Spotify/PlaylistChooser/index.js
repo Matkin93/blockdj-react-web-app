@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import * as api from '../../../utils/api/spotify';
+
 class SpotifyPlaylistChooser extends Component {
     render() {
         return (

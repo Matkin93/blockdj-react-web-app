@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class SpotifyCallback extends Component {
     render() {
@@ -9,12 +10,17 @@ class SpotifyCallback extends Component {
         );
     }
     componentDidMount() {
-        const { location, handleAuth } = this.props;
+        const { location, handleSpotifyAuth } = this.props;
         const searchOrHash = location.hash.length > 0 ? location.hash : location.search;
         if (/access_token|error/.test(searchOrHash)) {
-            handleAuth(this.props);
+            handleSpotifyAuth(this.props);
         }    
     }
+}
+
+SpotifyCallback.propTypes = {
+    handleSpotifyAuth: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired
 }
 
 export default SpotifyCallback;

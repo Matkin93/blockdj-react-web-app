@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 
 const AuthZeroGuard = props => {
-    const {isAuthenticated, login, children} = props;
-    if (isAuthenticated()) return children
+    const {isAuthZeroAuthenticated, authZeroLogin, children} = props;
+    if (isAuthZeroAuthenticated()) return children
     else return (
-        <Button color="primary" onClick={() => login()}>Login</Button>
+        <Button color="primary" onClick={() => authZeroLogin()}>Login</Button>
     )
 }
 
 AuthZeroGuard.propTypes = {
-    isAuthenticated: PropTypes.func.isRequired,
+    isAuthZeroAuthenticated: PropTypes.func.isRequired,
+    authZeroLogin: PropTypes.func.isRequired,
     children: PropTypes.any.isRequired
 }
 

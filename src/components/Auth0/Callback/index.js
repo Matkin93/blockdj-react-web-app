@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class AuthZeroCallback extends Component {
     render() {
@@ -9,11 +10,16 @@ class AuthZeroCallback extends Component {
         );
     }
     componentDidMount() {
-        const { location, handleAuth } = this.props;
+        const { location, handleAuthZeroAuth } = this.props;
         if (/access_token|id_token|error/.test(location.hash)) {
-            handleAuth(this.props);
+            handleAuthZeroAuth(this.props);
         }
     }
+}
+
+AuthZeroCallback.propTypes = {
+    handleAuthZeroAuth: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired
 }
 
 export default AuthZeroCallback;

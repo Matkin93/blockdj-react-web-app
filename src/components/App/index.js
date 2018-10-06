@@ -22,30 +22,30 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path="/" render={(props) => (
-          <AuthZeroGuard {...props} login={azs.login} isAuthenticated={azs.isAuthenticated}>
-            <Layout logout={azs.logout}>
-              <Home {...props} isAuthenticated={sps.isAuthenticated}/>
+          <AuthZeroGuard {...props} authZeroLogin={azs.login} isAuthZeroAuthenticated={azs.isAuthenticated}>
+            <Layout {...props} authZeroLogout={azs.logout} isSpotifyAuthenticated={sps.isAuthenticated} spotifyLogout={sps.logout}>
+              <Home {...props}/>
               <MapView {...props}/>
             </Layout>
           </AuthZeroGuard>)}
         />
         <Route exact path="/user/callback" render={(props) => {
-          return <AuthZeroCallback {...props} handleAuth={azs.handleAuth} />
+          return <AuthZeroCallback {...props} handleAuthZeroAuth={azs.handleAuth} />
         }} />
         <Route exact path="/user/unauthorised" render={(props) => {
-          return <AuthZeroUnauthorized {...props} logout={azs.logout} />
+          return <AuthZeroUnauthorized {...props} authZeroLogout={azs.logout} />
         }} />
         <Route exact path="/spotify/callback" render={(props) => (
-          <AuthZeroGuard {...props} login={azs.login} isAuthenticated={azs.isAuthenticated}>
-            <Layout logout={azs.logout}>
-              <SpotifyCallback {...props} handleAuth={sps.handleAuth} />
+          <AuthZeroGuard {...props} authZeroLogin={azs.login} isAuthZeroAuthenticated={azs.isAuthenticated}>
+            <Layout {...props} authZeroLogout={azs.logout} isSpotifyAuthenticated={sps.isAuthenticated} spotifyLogout={sps.logout}>
+              <SpotifyCallback {...props} handleSpotifyAuth={sps.handleAuth} />
             </Layout>
           </AuthZeroGuard>
         )} />      
         <Route exact path="/spotify/unauthorised" render={(props) => (
-          <AuthZeroGuard {...props} login={azs.login} isAuthenticated={azs.isAuthenticated}>
-            <Layout logout={azs.logout}>          
-              <SpotifyUnauthorised {...props} logout={sps.logout} />
+          <AuthZeroGuard {...props} authZeroLogin={azs.login} isAuthZeroAuthenticated={azs.isAuthenticated}>
+            <Layout {...props} authZeroLogout={azs.logout} isSpotifyAuthenticated={sps.isAuthenticated} spotifyLogout={sps.logout}>
+              <SpotifyUnauthorised {...props} spotifyLogout={sps.logout} />
             </Layout>
           </AuthZeroGuard>
         )} />      

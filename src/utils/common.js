@@ -23,7 +23,6 @@ export const getSpotifyAuthUrl = (config) => {
 export const getSpotifyCallbackParams = (location, cb) => {
     const searchOrHash = location.hash.length > 0 ? location.hash : location.search;
     const params = qs.parse(searchOrHash.replace(/^#?\/?\??/, ''));
-    console.log(params);
     if (params.hasOwnProperty('error')){
         cb(params.error);
     }

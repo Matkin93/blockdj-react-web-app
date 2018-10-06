@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map, TileLayer} from 'react-leaflet';
+import { Map, TileLayer } from 'react-leaflet';
 
 class MapView extends Component {
     state = {
