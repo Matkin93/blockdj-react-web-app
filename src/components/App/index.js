@@ -10,9 +10,9 @@ import AuthZeroCallback from '../Auth0/Callback';
 import AuthZeroUnauthorized from '../Auth0/Unauthorised';
 import SpotifyCallback from '../Spotify/Callback';
 import SpotifyUnauthorised from '../Spotify/Unauthorised';
+import Profile from '../Profile';
 
 import Layout from '../Layout';
-import Home from '../Home';
 import MapView from '../MapView';
 
 class App extends Component {
@@ -27,8 +27,14 @@ class App extends Component {
         <Route exact path="/" render={(props) => (
           <AuthZeroGuard {...props} authZeroLogin={azs.login} isAuthZeroAuthenticated={azs.isAuthenticated}>
             <Layout {...props} authZeroLogout={azs.logout} isSpotifyAuthenticated={sps.isAuthenticated} spotifyLogout={sps.logout}>
-              <Home {...props}/>
               <MapView {...props}/>
+            </Layout>
+          </AuthZeroGuard>)}
+        />
+        <Route exact path="/profile" render={(props) => (
+          <AuthZeroGuard {...props} authZeroLogin={azs.login} isAuthZeroAuthenticated={azs.isAuthenticated}>
+            <Layout {...props} authZeroLogout={azs.logout} isSpotifyAuthenticated={sps.isAuthenticated} spotifyLogout={sps.logout}>
+              <Profile {...props}/>
             </Layout>
           </AuthZeroGuard>)}
         />
@@ -57,6 +63,9 @@ class App extends Component {
     )
   }
   hasProfile = () => {
+    // TODO: Call remote api method to check if user has a profile, if he/she does
+    // then set the above profile state value to the profile object, otherwise set
+    // state profile value to false and return false.
     return this.state.profile;
   }
   setProfile = (profile) => {
