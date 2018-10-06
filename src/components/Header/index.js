@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, Container } from 'reactstrap';
+import { Button, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, Container } from 'reactstrap';
+import SpotifyAuthorizeButton from '../Spotify/AuthorizeButton';
 
 class Header extends Component {
     state = {
@@ -21,10 +22,10 @@ class Header extends Component {
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink href="/">Home</NavLink>
-                                </NavItem>
+                                    <SpotifyAuthorizeButton />
+                                </NavItem>                                
                                 <NavItem>
-                                    <Button color="primary" size="sm" className="mt-1 ml-2" onClick={logout}>Logout</Button>
+                                    <Button color="primary" size="sm" onClick={logout}>Logout</Button>
                                 </NavItem>
                             </Nav>
                         </Collapse>
