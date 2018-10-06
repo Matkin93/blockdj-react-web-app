@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
+import { Map, TileLayer} from 'react-leaflet';
 
 class MapView extends Component {
     state = {
@@ -24,13 +23,12 @@ class MapView extends Component {
     handleMapMove = event => {
         const {lat, lng} = event.target.getCenter();
         this.setState({lat,lng})
-      }
-    
-      handleZoomChange = event => {
+    }
+    handleZoomChange = event => {
         this.setState({
-          zoom: event.target.getZoom()
+            zoom: event.target.getZoom()
         })
-      }    
+    }    
 }
 
 export default MapView;

@@ -13,6 +13,9 @@ import Home from '../Home';
 import MapView from '../MapView';
 
 class App extends Component {
+  state = {
+    profile: false
+  }
   render() {
     const azs = new AuthZeroService();
     const sps = new SpotifyService();
@@ -32,12 +35,20 @@ class App extends Component {
         <Route exact path="/user/unauthorised" render={(props) => {
           return <AuthZeroUnauthorized {...props} logout={azs.logout} />
         }} />
-        <Route exact path="/spotify/callback" render={(props) => {
-          return <SpotifyCallback {...props} handleAuth={sps.handleAuth} />
-        }} />      
-        <Route exact path="/spotify/unauthorised" render={(props) => {
-          return <SpotifyUnauthorised {...props} logout={sps.logout} />
-        }} />      
+        <Route exact path="/spotify/callback" render={(props) => (
+          <Guard {...props} login={azs.login} isAuthenticated={azs.isAuthenticated}>
+            <Layout logout={azs.logout}>
+              <SpotifyCallback {...props} handleAuth={sps.handleAuth} />
+            </Layout>
+          </Guard>
+        )} />      
+        <Route exact path="/spotify/unauthorised" render={(props) => (
+          <Guard {...props} login={azs.login} isAuthenticated={azs.isAuthenticated}>
+            <Layout logout={azs.logout}>          
+              <SpotifyUnauthorised {...props} logout={sps.logout} />
+            </Layout>
+          </Guard>
+        )} />      
       
       </Switch>
     )
