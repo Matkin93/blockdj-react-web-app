@@ -12,6 +12,7 @@ import AuthZeroUnauthorized from '../Auth0/Unauthorised';
 import SpotifyCallback from '../Spotify/Callback';
 import SpotifyUnauthorised from '../Spotify/Unauthorised';
 import SpotifyPlaylistChooser from '../Spotify/Playlist/Chooser';
+import SpotifyPlaylistTracks from '../Spotify/Playlist/Tracks';
 import Profile from '../Profile';
 import Layout from '../Layout';
 import MapView from '../MapView';
@@ -45,7 +46,14 @@ class App extends Component {
               <SpotifyPlaylistChooser {...props}/>
             </Layout>
           </AuthZeroGuard>)}
-        />        
+        />    
+        <Route exact path="/playlists/:id/tracks" render={(props) => (
+          <AuthZeroGuard {...props} authZeroLogin={azs.login} isAuthZeroAuthenticated={azs.isAuthenticated}>
+            <Layout {...props} authZeroLogout={azs.logout} isSpotifyAuthenticated={sps.isAuthenticated} spotifyLogout={sps.logout}>
+              <SpotifyPlaylistTracks {...props}/>
+            </Layout>
+          </AuthZeroGuard>)}
+        />                
         <Route exact path="/user/callback" render={(props) => {
           return <AuthZeroCallback {...props} handleAuthZeroAuth={azs.handleAuth} hasProfile={this.hasProfile} />
         }} />

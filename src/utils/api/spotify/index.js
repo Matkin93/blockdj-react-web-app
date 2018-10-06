@@ -12,3 +12,7 @@ export const getPlaylists = () => {
 export const getTracksForPlaylist = (url) => {
     return axios.get(url);
 }
+
+export const getPlaylistTracks = (id) => {
+    return axios.get(`${API_URL}/playlists/${id}/tracks`);
+}

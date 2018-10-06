@@ -19,7 +19,7 @@ class SpotifyPlaylistChooser extends Component {
                         <p>Select the playlist you want to enter or click the view button to view the tracks the playlist contains...</p>
                         <ul style={{margin:'0',padding:'0'}}> 
                             {playlists && playlists.map(playlist => {
-                                return (<li key={playlist.id} style={{listStyleType:'none', marginBottom:'1rem'}}>{playlist.name}<span style={{display:'inline-block','float':'right','clear':'both'}}><Button size="sm" style={{marginRight:'0.5rem'}} onClick={() => this.enterPlaylist(playlist)}>Enter this playlist</Button><Button size="sm" onClick={() => this.playInSpotify(playlist)} style={{marginRight:'0.5rem'}}>Play in Spotify</Button><Button size="sm">Tracks</Button></span></li>)
+                                return (<li key={playlist.id} style={{listStyleType:'none', marginBottom:'1rem'}}>{playlist.name}<span style={{display:'inline-block','float':'right','clear':'both'}}><Button size="sm" style={{marginRight:'0.5rem'}} onClick={() => this.enterPlaylist(playlist)}>Enter this playlist</Button><Button size="sm" onClick={() => this.playInSpotify(playlist)} style={{marginRight:'0.5rem'}}>Play in Spotify</Button><Button onClick={() => this.playlistTracks(playlist)} size="sm">Tracks</Button></span></li>)
                             })}                    
                         </ul>
                     </Col>
@@ -48,6 +48,10 @@ class SpotifyPlaylistChooser extends Component {
     }
     playInSpotify = (playlist) => {
         window.location.href = playlist.uri;
+    }
+    playlistTracks = (playlist) => {
+        const {history} = this.props;
+        history.push(`/playlists/${playlist.id}/tracks`);
     }
 }
 
